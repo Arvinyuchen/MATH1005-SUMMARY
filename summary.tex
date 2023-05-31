@@ -5,6 +5,7 @@
 \usepackage{setspace}
 \usepackage{amsfonts}
 \newtheorem{thm}{Theorem}
+\newtheorem{corollary}{Corollary}
 
 \title{MATH1005 SUMMARY}
 \author{YUCHEN YAN U7663065}
@@ -73,8 +74,106 @@ Let $S$ be a set, and $m,n \; \in \mathbb{N}  $\\
 An $m \times n \; matrix $ (over $S$) is a rectangular array of members of $S$,
 the array having $m$ rows and $n$ columns. \\
 The set of all $m \times n \; matrix $ matrices over $S$ is denoted by $M_{m \times n}(S)$\\
-
-\section{Weighted Graphs}
+\section{D1:Graph Theory}
+\subsection{Definition of Graphs}
+A graph $G$ is an ordered pair $G = (V(G),E(G)) $ comprising:
+\begin{itemize}
+    \item a set of vertices $V(G)$
+    \item a multiset of edges $E(G)$, with each edge being a size-2 multiset of vertices. 
+\end{itemize} 
+\subsection{Terminology}
+\begin{itemize}
+    \item An edge connects its \textbf{endpoints}.
+    \item An edge with both endpoints the same is called a \textbf{loop}.
+    \item Two edges may connect the same pair of endpoints, in which case they are said to be \textbf{parallel}.
+    \item Two vertices are adjacent if they are connected by an edge; two edges are adjacent if they share an endpoint. 
+    \item An edge is \textbf{incident on} its endpoints.
+    \item A vertex with no incident edges is \textbf{isolated}.
+    \item The \textbf{order} of a graph is the number of vertices. 
+\end{itemize}
+\subsection{Isomorphisms}
+An \textbf{Isomorphism} between two graphs $G_1$ and $G_2$ is a bijection $f:V(G_1) \rightarrow V(G_2)$ such that $\{u,v\}$ appears in $E(G_1)$ exactly as many time as $\{f(u),f(v)\}$ appears in $E(G_2)$.
+\subsection{Digraphs}
+A directed graph is the same as a graph except that edges are ordered pairs of endpoints.
+\subsubsection{Niche Overlap Graphs}
+Application in ecology, each species is represented by a vertex. An undirected edge connects two vertices if and only if the species represented by these vertices compete for food.
+\section{Types of Graphs}
+\begin{itemize}
+    \item A simple graph is a graph that has no loops and no parallel edges.
+    \item A simple digraph is a digraph that has no loops and no parallel edges.\\
+    \textbf{NOTE:} $(a,b)$ and $(b,a)$ is allowed. 
+    \item A complete graph on $n$ vertices is a simple graph in which each pair of distinct vertices are adjacent. A complete graph on $n$ vertices is denoted by $K_n$.
+    \begin{align}
+        the \;number\; of\; edges = \frac{n(n-1)}{2} =\binom{n}{2} 
+    \end{align}
+    \item A bipartite graph is a simple graph whose vertices can be partitioned into two disjoint sets $A$ and $B$ such that every edge of the graph connects a vertex in $A$ to a vertex in $B$.
+    \item A complete bipartite graph is a simple graph whose vertices may be partitioned into two sets $A$ and $B$ such that:\\
+    $\forall a \in A$ and $\forall b \in B$, the edge $\{a,b\}$ belongs to the graph. 
+    If $A$ has $m$ vertices and $B$ has $n$ vertices, the complete bipartite graph on $A$ and $B$ is denoted $K_{m,n}$ with $m \times n $ edges.
+    
+\end{itemize}
+\subsection{Subgrah}
+A subgrah,$S$, of a graph $G$, is a graph whose vertices are a subset of $V(G)$ and whose edges are a subset of $E(G)$. 
+\begin{align}
+    V(S) \subseteq V(G)\\
+    E(S) \subseteq E(S)
+\end{align}
+\subsection{Degree}
+The degree of a vertex is the number of edges incident on it(each loop counted twice). 
+\subsection{The Handshake Theorem}
+If $G$ is any graph, then the total degree of $G$ equals twice the number of edges of $G$.
+\begin{align}
+    \sum_{v \in V(G)} deg(v) = 2\left\lvert E(G) \right\rvert 
+\end{align}
+\textbf{NOTE:} It is impossible to have a graph has an even number of vertices of odd degree. 
+\subsection{Closed Walks}
+A walk $v_0,e_1,v_1,2_2,\dots,e_n,v_n$ is called a closed when $v_0 = v_n$. 
+\subsection{Paths}
+A path is a walk that does not repeat any edge.\\
+A simple path is a path which does not repeat any vertex.
+\subsection{Circuits}
+A circuit is a closed path.\\
+A simple circuit is a simple closed path.
+\subsection{Connected Graphs}
+A graph is connected if every pair of vertices can be connected by a walk.\\
+A component of a graph is a maximal connected subgraph.
+\subsection{Bridges and Cut vertices}
+A bridge in a connected graph is an edge which erasure disconnects the graph. \\
+A cut vertex in a connected graph is a vertex which one erasure disconnects the graph. 
+\subsection{Euler Paths and Circuits}
+Euler path: is a path passing through every edge.\\ 
+Euler circuit: is a circuit passing through every edge.
+\begin{thm}
+    A connected graph has an Euler circuit if and only if each of its vertices has even degree. 
+\end{thm}
+\begin{corollary}
+    A connected graph has an Euler path if and only if it has exactly two vertices of odd degree. 
+\end{corollary}
+\subsection{Fleury's Algorithm for finding Euler Circuits}
+\begin{enumerate}
+    \item Pick any vertex of $G$ as a starting point. 
+    \item From that vertex choose any edge to traverse that does not cross a bridge of the current reduced graph, unless there is no choice.
+\end{enumerate}
+\subsection{Hamilton Paths and Circuits}
+A Hamilton path for a graph is a simple path which passes through every vertex. 
+A Hamilton circuit for a graph is a simple circuit which passes through every vertex. 
+\subsection{Trees}
+A tree is a connected graph with no circuits other that the trivial ones. 
+\begin{thm}
+    Let T be a graph with n vertices. The following statements are logically equivalent:
+    \begin{enumerate}
+        \item T is a tree.
+        \item T has no simple circuits and n-1 edges.
+        \item T is connected and has n-1 edges.
+        \item T is connected and every edge is a bridge. 
+        \item Any two vertices of T are connected by exactly one simple path. 
+        \item T contains no non-trivial circuits, but the addition of any new edge creates a simple circuit. 
+    \end{enumerate}
+\end{thm}
+\subsection{Spanning Tree}
+A spanning tree for a graph $G$ is a subgraph of G which is a tree and contains all the vertices of $G$.  
+\textbf{Method:}Initialize T to be the vertices of G but not edges, pick an edge and add to T if and only if it does not make a circuit in T. 
+\section{D2:Weighted Graphs}
 A weighted graph is a graph $G$ together with a weight function weight : $E(G) \rightarrow \mathbb{Q}_+ $. \\
 Four type of problems in the weighted graphs:
 \begin{enumerate}
@@ -142,7 +241,7 @@ Remarks (not necessary for the answer to this question but relevant to the prese
 Start with codomain in alphabetical order. 
 
 \section{D3: Random Walks on Graphs}
-\section{Definition:Random Walks}
+\subsection{Definition:Random Walks}
 Let G be a digraph with n vertices $V = V(G) = \{1,\dots,n\}$ and directed edge set $E = E(G)$. 
 
 A square matrix with non-negative entries such that the enties in each row sum to 1 is called a stochastic matrix. 
@@ -193,7 +292,7 @@ Let $P = (p_1,p_2,\dots,p_n)$ be the steady state vector for the random walk on 
 
 \section{C3:Markov Process}
 It is closely related with the above topic. 
-\section{Steady State vector}
+\subsection{Steady State vector}
 \begin{align}
     T'v=v
 \end{align}
