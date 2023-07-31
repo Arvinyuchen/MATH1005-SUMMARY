@@ -57,10 +57,20 @@ $f \circ f^{-1} = B \rightarrow A \rightarrow B = i_B$
 A digit is called a \textbf{bit}\\
 A block of 8 bits called a \textbf{byte}\\
 A block of 4 bits is called a \textbf{nibble}
+\subsection{The range of two's complement method}
+First, it is really important to remember that the $d_1$ is still the sign bit.\\ 
+Eg.00000000 stands for 0, 01111111 stands for 127 and we cannot continue to add one for 8 bits since 10000000 is occupied by the -128. Therefore, the range of 8 bit-signed integers representing is [-128,127].
+\subsection{Advantage of two's complement method}
+\begin{enumerate}
+    \item Zero is represented only by 00000000.
+    \item Addition process still works.
+    \item Converting process is easy. 
+    \item $x-y$ find the representation of $-y$, then use addition $x + (-y)$
+\end{enumerate}
+
 \subsection{Negative Integers}
 $(1 d_ 1 d_2 d_3 \dots d_t)$ toggle all bits, add one, then negate.
-\subsection{Subtract}
-$x-y$ find the representation of $-y$, then use addition $x + (-y)$
+
 \subsection{Hexdecimal Multiplication}
 \begin{figure}[htb]
 \centering 
@@ -68,12 +78,22 @@ $x-y$ find the representation of $-y$, then use addition $x + (-y)$
 \caption{Hexdecimal Multiplication} 
 \end{figure}
 
-\section{}{B3: Matrices}
+\section{B3: Matrices}
 \subsection{Definition: Matrix}
 Let $S$ be a set, and $m,n \; \in \mathbb{N}  $\\
 An $m \times n \; matrix $ (over $S$) is a rectangular array of members of $S$,
 the array having $m$ rows and $n$ columns. \\
 The set of all $m \times n \; matrix $ matrices over $S$ is denoted by $M_{m \times n}(S)$\\
+\section{C1:Countability}
+A set $S$ is called countable when there is a bijection from $S$ to  a subset of the set $\mathbb{N}$ of natural numbers. 
+\subsection{Comparing Cardinalities}
+Two sets $A$ and $B$ have the same cardinality provided there exists a bijection from $A$ to $B$.
+\begin{align}
+    \forall x,y \in A x \neq y \Rightarrow \phi (x) \neq \phi (y)\\
+    \forall b \in B \exists a \in A \phi (a) = b 
+\end{align}
+Also remember that $\phi : A \rightarrow B$ is a bijection if and only if it has an inverse $\phi^{-1} : B \rightarrow A$.\\
+Any infinite subset S of $\mathbb{N}$ has the same cardinality as $\mathbb{N}$ itself.
 \section{D1:Graph Theory}
 \subsection{Definition of Graphs}
 A graph $G$ is an ordered pair $G = (V(G),E(G)) $ comprising:
@@ -258,7 +278,7 @@ Then $X_k = (T')^k e_i = (q_j)_{1 \le j \le n}$ say gives, for $1 \le j \le n$, 
     \item Transpose the matrix $T$ to $T'$.
     \item Subtract the identity matrix from the transposed matrix $T'$. 
     \item Add columns with all entries 0 after the last column of matrix. 
-    \item \textbf{Replace} the last tow with all 1's
+    \item \textbf{Replace} the last row with all 1's
     \item Apply the row operations to reduce the matrix to row reduced echelon form and the last column is the steady states. 
 \end{enumerate}
 \subsection{HYPOTHESES OF THE MODEL}
